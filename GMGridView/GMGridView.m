@@ -754,10 +754,12 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 - (void)sortingMoveDidStopAtPoint:(CGPoint)point
 {
     [_sortMovingItem shake:NO];
-	[UIView animateWithDuration:0.2f
-					 animations:^{
+    [UIView animateWithDuration:0.2f
+                     animations:^{
 						 _sortMovingItem.transform = CGAffineTransformIdentity;
-					 }];
+                     } completion:^(BOOL finished) {
+                         [_sortMovingItem shakeStatus: YES];
+                     }];
     
     _sortMovingItem.tag = _sortFuturePosition + kTagOffset;
     
